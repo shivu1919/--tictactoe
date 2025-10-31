@@ -14,7 +14,10 @@ export default function HumanVsHuman() {
     const cellRef = useRef([])
 
     const restartGame = () => {
-        window.location.reload()
+       for(let i=0; i<9; i++){
+            cellRef.current[i].innerHTML=''
+       }
+       setPlayer("O")
     }
 
     const playerClick = (index) => {

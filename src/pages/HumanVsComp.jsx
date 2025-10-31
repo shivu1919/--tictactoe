@@ -13,7 +13,10 @@ export default function HumanVsComp() {
     const [isGameActive, setIsGameActive] = useState(true)
 
     const restartGame = () => {
-       window.location.reload()
+       for(let i=0; i<9; i++){
+            cellRef.current[i].innerHTML=''
+       }
+       setPlayer("O")
     }
 
     const [time, setTime] = useState((new Date().getDate() + "/" + parseInt(new Date().getMonth() + 1) + "/" + new Date().getFullYear()))
