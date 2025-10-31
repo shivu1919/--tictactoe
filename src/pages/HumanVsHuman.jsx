@@ -52,6 +52,16 @@ export default function HumanVsHuman() {
                 return true;
             }
         }
+
+        let click = 0;
+        for(let i of data){
+            if(i!='') click++;
+        }
+
+        if(click==9){
+            playerRef.current.innerHTML = "Game drawn <br>Please restart the game"
+            return true;
+        }
     }
 
     return (
