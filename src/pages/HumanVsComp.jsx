@@ -13,7 +13,7 @@ export default function HumanVsComp() {
     const [isGameActive, setIsGameActive] = useState(true)
 
     const restartGame = () => {
-        window.location = "/vsComputer"
+       navigate(0)
     }
 
     const [time, setTime] = useState((new Date().getDate() + "/" + parseInt(new Date().getMonth() + 1) + "/" + new Date().getFullYear()))
