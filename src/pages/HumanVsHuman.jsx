@@ -14,38 +14,41 @@ export default function HumanVsHuman() {
     const cellRef = useRef([])
 
     const restartGame = () => {
-       for(let i=0; i<9; i++){
-            cellRef.current[i].innerHTML=''
-       }
-       setPlayer("O")
+        for (let i = 0; i < 9; i++) {
+            cellRef.current[i].innerHTML = ''
+            cellRef.current[i].style.backgroundColor="white"
+        }
+        setPlayer("O")
+        playerRef.current.innerHTML = "O's turn"
+        setIsGameActive(true)
     }
 
     const playerClick = (index) => {
-        if (!isGameActive || cellRef.current[index].innerHTML!='') return 0;
+        if (!isGameActive || cellRef.current[index].innerHTML != '') return 0;
 
-        if(player=="O"){
+        if (player == "O") {
             cellRef.current[index].innerHTML = "O"
-            if(checkWinner()) return 0;
+            if (checkWinner()) return 0;
             setPlayer("X")
         }
-        
-        else{
+
+        else {
             cellRef.current[index].innerHTML = "X"
-            if(checkWinner()) return 0;
+            if (checkWinner()) return 0;
             setPlayer("O")
         }
     }
 
-    const checkWinner = ()=>{
-        let data = cellRef.current.map((item)=>item.innerHTML)
+    const checkWinner = () => {
+        let data = cellRef.current.map((item) => item.innerHTML)
         const winPattern = [
-            [0,1,2],[3,4,5],[6,7,8],    //rows 
-            [0,3,6],[1,4,7],[2,5,8],    //column
-            [0,4,8],[2,4,6]        //diagonals
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],    //rows 
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],    //column
+            [0, 4, 8], [2, 4, 6]        //diagonals
         ];
 
-        for(let [a,b,c] of winPattern){
-            if(data[a] && data[a]==data[b] && data[a]==data[c]){
+        for (let [a, b, c] of winPattern) {
+            if (data[a] && data[a] == data[b] && data[a] == data[c]) {
                 playerRef.current.innerHTML = `${player} is the winner <br>Please restart the game`
                 setIsGameActive(false)
                 cellRef.current[a].style.backgroundColor = "green"
@@ -57,11 +60,11 @@ export default function HumanVsHuman() {
         }
 
         let click = 0;
-        for(let i of data){
-            if(i!='') click++;
+        for (let i of data) {
+            if (i != '') click++;
         }
 
-        if(click==9){
+        if (click == 9) {
             playerRef.current.innerHTML = "Game drawn <br>Please restart the game"
             return true;
         }
@@ -69,9 +72,9 @@ export default function HumanVsHuman() {
 
     return (
         <>
-            <div style={{display:"flex",padding:"6px" ,alignItems:"center", justifyContent:"space-between"}}>
+            <div style={{ display: "flex", padding: "6px", alignItems: "center", justifyContent: "space-between" }}>
                 <span>Date: {time}</span>
-                <button id={HumanStyle.homebtn} onClick={()=> navigate("/")}>Go to Home</button>
+                <button id={HumanStyle.homebtn} onClick={() => navigate("/")}>Go to Home</button>
             </div>
             <hr />
             <br /><br />
@@ -93,7 +96,7 @@ export default function HumanVsHuman() {
                 </div>
 
                 <button id={HumanStyle.restartbtn} onClick={restartGame}>Restart</button>
-                
+
             </div>
         </>
     );
